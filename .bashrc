@@ -22,8 +22,6 @@ module load arm/cluster
 # => BEGIN CUSTOMIZATION 
 #######################################
 PS1="\[\033[38;5;79m\]\w\[$(tput sgr0)\]\n\\$\[$(tput sgr0)\]"
-alias Eon='cd /projects/ssg/pj10000083_refsys/users/oliman01/eon'
 alias C='clear'
 alias ll='ls -la'
 alias Bashrc='vi ~/.bashrc'
-alias ETL='cd /projects/ssg/pj10000083_refsys/users/oliman01/eon/pcierefsys.ip/logical/pcierefsys/pcierefsys_f1_top/verilog'
