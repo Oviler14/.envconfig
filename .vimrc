@@ -1,3 +1,4 @@
+set number
 inoremap jk <ESC>
 let mapleader = " "
 filetype plugin indent on
