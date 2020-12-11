@@ -21,7 +21,7 @@ module load arm/cluster
 #
 # => BEGIN CUSTOMIZATION 
 #######################################
-PS1="\[\033[38;5;79m\]\w\[$(tput sgr0)\]\n\\$\[$(tput sgr0)\ ]"
+PS1="\[\033[38;5;79m\]\w\[$(tput sgr0)\]\n\\$\[$(tput sgr0)\] "
 alias C='clear'
 alias ll='ls -la'
 alias Bashrc='vi ~/.bashrc'
