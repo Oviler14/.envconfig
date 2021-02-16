@@ -12,7 +12,6 @@ nmap <leader>n :set number!<ENTER>
 nmap <leader>h :noh<ENTER>
 nmap <leader>w :%s/\s\+$//e<enter>
 nmap <leader>f :f<ENTER>
-nmap ^[h <C-w>h 
 syntax on
 filetype plugin indent on
 set encoding=utf-8
@@ -23,7 +22,7 @@ nmap <C-i> i<F1>
 
 "Colours
 color desert
-let g:rainbow_active = 1 
+let g:rainbow_active = 1
 
 "vim-plug
 call plug#begin('~/.vim/plugged')

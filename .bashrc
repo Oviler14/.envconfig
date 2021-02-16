@@ -32,12 +32,12 @@ alias lt='ls --human-readable --size -1 -S --classify'
 function cd_up() {
   case $1 in
     *[!0-9]*)                                          # if no a number
-        [[ $PWD =~ (.*/$1[^/]*/).* ]] && cd ${BASH_REMATCH[1]}
-        # cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )     # search dir_name in current path, if found - cd to it
+	    [[ $PWD =~ (.*/$1[^/]*/).* ]] && cd ${BASH_REMATCH[1]}
+	    # cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )     # search dir_name in current path, if found - cd to it
       ;;                                               # if not found - not cd
-    *)  
+    *)
       cd $(printf "%0.0s../" $(seq 1 $1));             # cd ../../../../  (N dirs)
-    ;;  
+    ;;
   esac
 }
 alias 'up'='cd_up'                                # can not name function 'cd..'
@@ -60,14 +60,22 @@ export etes=$etb/test
 export gen=/projects/ssg/refsys_perseus/users/oliman01/genesis
 alias  Esrc='pushd $PWD > /dev/null; \
              echo "Sourcing sourceme.bash from $eon"; cd $eon; source sourceme.bash; \
+<<<<<<< HEAD
              popd > /dev/null;'
+=======
+       	     popd > /dev/null;'
+>>>>>>> 7bbef62... Updates
 alias Gsrc='pushd $PWD > /dev/null; \
             echo "Sourcing sourceme.bash from $gen"; cd $gen; source sourceme.bash; \
             popd > /dev/null;'
 alias ll='ls -la'
 alias Brc='vim ~/.bashrc'
 alias Vrc='vim ~/.vimrc'
+<<<<<<< HEAD
 alias Eon='cd $eon'
+=======
+alias Eon='cd $eon' 
+>>>>>>> 7bbef62... Updates
 alias Etl='cd $edes/pcierefsys/pcierefsys_f1_top/verilog'
 alias Etb='cd $etb/'
 alias Gen='cd $gen'
