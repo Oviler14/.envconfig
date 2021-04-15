@@ -22,7 +22,7 @@ module load arm/cluster
 # => BEGIN CUSTOMIZATION
 #######################################
 module load swdev git/git/2.28.0
-#module load arm/clusterfg/1.0
+module load arm/clusterfg/1.0
 module load util vim/vim/8.2
 export PS1="\n\[\033[38;5;134m\]\h\[$(tput sgr0)\] \[\033[38;5;79m\]\w\[$(tput sgr0)\]\n\\$\[$(tput sgr0)\] "
 alias C='clear'
@@ -52,8 +52,9 @@ bind '"\C-f": \e'
 
 export oli=/projects/ssg/pj10000083_refsys/users/oliman01
 export eon=$oli/eon
-export edes=$eon/pcierefsys.ip/logical
-export etop=$edes/pcierefsys/pcierefsys_f1_top
+export eds=$eon/pcierefsys.ip/logical
+export scr=$eds/scripts
+export etop=$eds/pcierefsys/pcierefsys_f1_top
 export etb=$eon/pcierefsys_tb.ip/logical/top_tb
 export etbe=$etb/tbench
 export etes=$etb/test
@@ -69,8 +70,10 @@ alias Brc='vim ~/.bashrc'
 alias Vrc='vim ~/.vimrc'
 alias Eon='cd $eon'
 alias Etl='cd $edes/pcierefsys/pcierefsys_f1_top/verilog'
-alias Etb='cd $etb/'
+alias Etb='cd $etb'
+alias Eds='cd $eds'
 alias Gen='cd $gen'
+alias push='git push origin HEAD:refs/for/master'
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
