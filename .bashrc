@@ -56,14 +56,15 @@ bind '"\C-f": \e'
 alias ll='ls -la'
 alias Brc='vim ~/.bashrc'
 alias Vrc='vim ~/.vimrc' 
-alias push='git push origin HEAD:refs/for/master'
+alias push='git push origin HEAD:refs/for/dev'
+alias push7='git push origin HEAD:refs/for/release/20210613/DEV7/0'
 alias ls='ls $LS_OPTIONS'
 alias C='clear'
 alias lt='ls --human-readable --size -1 -S --classify'
-alias bsub_16G='bsub -P PJ10000083 -M 16777216 -R 'select[rhe7]' -W 24:00 -Is'
-alias bsub_16G_rhe6='bsub -P PJ10000083 -M 16777216 -R 'select[rhe6]' -W 24:00 -Is'
-alias bsub_32G='bsub -P PJ10000083 -M 33554432 -R 'select[rhe7]' -W 24:00 -Is'
-alias bsub_4G='bsub -P PJ10000083 -M 4194304  -R 'select[rhe7]' -W 24:00 -Is'
+alias bsub_16G='bsub -P PJ1000598 -M 16777216 -R 'select[rhe7]' -W 24:00 -Is'
+alias bsub_16G_rhe6='bsub -P PJ1000598 -M 16777216 -R 'select[rhe6]' -W 24:00 -Is'
+alias bsub_32G='bsub -P PJ1000598 -M 33554432 -R 'select[rhe7]' -W 24:00 -Is'
+alias bsub_4G='bsub -P PJ1000598 -M 4194304  -R 'select[rhe7]' -W 24:00 -Is'
 
 # Eon
 export oli=/projects/ssg/pj10000083_refsys/users/oliman01
@@ -84,11 +85,32 @@ alias  Esrc='pushd $PWD > /dev/null; \
 
 # Genesis
 export gen=/projects/ssg/refsys_perseus/users/oliman01/genesis
-export gca=$gen/genesis.canvas
+export gca=$gen/small.canvas
 export gtb=$gca/css_tb/css_top_tb
+export for=$gtb/test/formal
 alias Gen='cd $gen'
 alias Gca='cd $gca'
 alias Gtb='cd $gtb'
+alias For='cd $for'
+alias Mscp='cd $for/reset_sync_mscp_conn_check'
+alias Clk='cd $gtb/test/sim/clock_test/clk_boundary_test'
 alias Gsrc='pushd $PWD > /dev/null; \
             echo "Sourcing sourceme.bash from $gen"; cd $gen; source sourceme.bash; \
+            popd > /dev/null;'
+
+
+# MCN
+export mcn=/projects/ssg/pj1000598/users/oliman01/
+export sys=$mcn/systems
+export perf=$mcn/perf_models
+alias Sys='cd $sys'
+alias Perf='cd $perf'
+alias MCN='cd /projects/ssg/pj1000598/users/oliman01'
+alias Msrc='pushd $PWD > /dev/null; \
+            echo "Sourcing:"; \
+            . $sys/etc/euhpc-env.sh; echo "euhpc-env.sh"; \
+            . $sys/etc/euhpc-env-systemc-8.3.sh; echo "euhpc-env-systemc-8.3.sh"; \
+            . $sys/etc/setup.sh; echo "setup.sh"; \
+            export TURSE_INSTALL_DIR=/projects/ssg/pj1000598/users/syejaf01/work/databuffer/systems/external-models/Turse; \
+            export LSB_DEFAULTPROJECT=PJ1000598; \
             popd > /dev/null;'
