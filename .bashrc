@@ -23,7 +23,7 @@ module load arm/cluster
 #######################################
 
 # Modules
-module load swdev git/git/2.28.0
+module load swdev git/git/2.37.0
 #module load arm/clusterfg/1.0
 module load util vim/vim/9.0.5
 module load swdev python/python/2.7.8
@@ -65,11 +65,16 @@ alias Vrc='vim ~/.vimrc'
 alias ls='ls $LS_OPTIONS'
 alias C='clear'
 alias lt='ls --human-readable --size -1 -S --classify'
-alias dusize='du -h * | sort -h'
+alias dusize='du -h | sort -h'
 alias fg='module load arm/clusterfg/1.0'
 alias Find='find . -iname'
 alias Lock='lsof +D'
 alias Colours='for COLOR in {1..255}; do echo -en "\e[38;5;${COLOR}m${COLOR} "; done; echo;'
+alias Track='git log --follow -p --'
+
+CI() {
+  git push origin HEAD:refs/for/"$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
+}
 
 rund() { 
   command rund "$@" | txts -n luna_log 
@@ -80,24 +85,45 @@ function Commitnt() {
 }
 
 # Project bindings
+
+function SCP
+{
+export scp=/projects/ssg/pj32000042_blackbird/users/oliman01/e_scp_f4
+export pol=$scp/scp_canvas/client_polaris.canvas
+export top=$pol/scp_top_tb/logical/scp_top_tb
+export can=$pol/scp_customization/logical/scp_customization/verilog
+export des=$scp/design_library/scp_customization.ip/logical/scp_customization/verilog
+export tb=$scp/verif_library/scp_tb.ip/logical/scp_top_tb/
+alias SCP='cd $scp'
+alias Top='cd $top'
+alias Can='cd $can'
+alias Des='cd $des'
+alias Tb='cd $tb'
+alias Genp='genp df $scp/scp_canvas/client_polaris.canvas/packages.yaml:scp_customization -p'
+alias Src='pushd $PWD > /dev/null; \
+           echo "Sourcing sourceme.bash from $scp"; cd $scp; source sourceme; \
+           popd > /dev/null;'
+cd $scp
+}
+
+function BB 
+{
+export bb=/projects/ssg/pj32000042_blackbird/users/oliman01/bb24_comss
+alias BB='cd $bb'
+alias Src='pushd $PWD > /dev/null; \
+           echo "Sourcing sourceme.bash from $bb"; cd $bb; source sourceme.bash; \
+           popd > /dev/null;'
+cd $bb
+}
+
+function LCP 
+{
 export voy=/projects/ssg/pj33000227_voyager/users/oliman01/voyager_lcp
 export can=$voy/fremont.canvas
 export top=$voy/verif_library/lcp_tb/logical/lcp_top_tb
 export des=$voy/design_library/lcp.ip/logical/lcp_top/verilog
 alias Voy='cd $voy'
 alias Can='cd $can'
-alias Top='cd $top'
-alias Des='cd $des'
-alias Src='pushd $PWD > /dev/null; \
-           echo "Sourcing sourceme.bash from $voy"; cd $voy; source sourceme.bash; \
-           popd > /dev/null;'
-
-function LCP 
-{
-export voy=/projects/ssg/pj33000227_voyager/users/oliman01/voyager_lcp
-export top=$voy/verif_library/lcp_tb/logical/lcp_top_tb
-export des=$voy/design_library/lcp.ip/logical/lcp_top/verilog
-alias Voy='cd $voy'
 alias Top='cd $top'
 alias Des='cd $des'
 alias Src='pushd $PWD > /dev/null; \
@@ -151,7 +177,7 @@ alias Src='pushd $PWD > /dev/null; \
 cd $voy
 }
 
-export pjcode=pj33000227
+export pjcode=pj32000042
 alias bsub_4G='bsub -P $pjcode -M 4G  -R 'select[rhe7]' -W 24:00 -Is'
 alias bsub_8G='bsub -P $pjcode -M 8G -R 'select[rhe7]' -W 24:00 -Is'
 alias bsub_16G='bsub -P $pjcode -M 16G -R 'select[rhe7]' -W 24:00 -Is'
@@ -163,3 +189,5 @@ alias LCM='cd /projects/ssg/pj31000117_kydos/users/oliman01/lcm'
 alias MCN='cd /projects/ssg/pj1000598/users/oliman01'
 alias Gen='cd /projects/ssg/refsys_perseus/users/oliman01/genesis'
 alias Gtop='cd /projects/ssg/refsys_perseus/users/oliman01/genesis/small.canvas/css_tb/css_top_tb'
+
+SCP
