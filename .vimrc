@@ -7,12 +7,12 @@ set redrawtime=10000
 "Movement
 noremap j h
 noremap k j
-noremap l k
-noremap ; l
-map <C-j>  10j
+noremap i k
+noremap h i
+map <C-j>  20j
 nmap <C-k>  10k
-map <C-l>  10l
-map <C-;>  10;
+map <C-l>  20l
+map <C-i>  10i
 noremap ] }ge$
 noremap [ {w
 noremap <silent><C-]> /;<CR>:noh<CR>
@@ -24,6 +24,7 @@ nnoremap zv zr
 nnoremap zb zk
 nnoremap zn zj
 vnoremap <silent><C-k> :<C-U>call cursor(line("'}")-1,col("'>"))<CR>`<1v``
+vnoremap H I
 
 "Commands
 noremap <leader>r :set relativenumber!<ENTER>
@@ -43,10 +44,8 @@ inoremap <C-e> <esc>ea
 inoremap <C-b> <esc>bi
 inoremap <C-j> <Left>
 inoremap <C-k> <Down>
-inoremap <C-l> <Up>
-inoremap <C-;> <Right>
+inoremap <C-l> <Right>
 inoremap <C-]> <esc>]a
-inoremap <C-[> <esc>[i
 inoremap begin<CR> begin<CR>end<UP><Right><Right><CR>
 inoremap {<CR> {<CR>}<up><CR>
 
@@ -81,8 +80,8 @@ call plug#end()
 "EasyAlign remaps
 xmap ga <Plug>(EasyAlign)
 noremap ga <Plug>(EasyAlign)
-noremap <leader>a vipga<C-x>
-noremap <leader>s vipga
+noremap <leader>a vhpga<C-x>
+noremap <leader>s vhpga
 
 "NerdTree remaps
 noremap <leader>t :NERDTreeToggle<CR>
