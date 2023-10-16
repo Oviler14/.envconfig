@@ -9,6 +9,11 @@ noremap j h
 noremap k j
 noremap i k
 noremap h i
+noremap J h
+noremap K j
+noremap I k
+noremap H I
+noremap L l
 map <C-j>  20j
 nmap <C-k>  10k
 map <C-l>  20l
@@ -24,6 +29,7 @@ nnoremap zv zr
 nnoremap zb zk
 nnoremap zn zj
 vnoremap <silent><C-k> :<C-U>call cursor(line("'}")-1,col("'>"))<CR>`<1v``
+vnoremap h i
 vnoremap H I
 
 "Commands
@@ -32,8 +38,8 @@ noremap <leader>n :set number!<ENTER>
 noremap <leader>h :noh<ENTER>
 noremap <leader>w :%s/\s\+$//e<enter>
 noremap <leader>f :f<ENTER>
-noremap <leader>; vip:s/,$/;/<enter>
-noremap <leader>, vip:s/\(\w\+\)\(;\)/.\1 (\1),/<enter>
+noremap <leader>; vhp:s/,$/;/<enter>
+noremap <leader>, vhp:s/\(\w\+\)\(;\)/.\1 (\1),/<enter>
 noremap <leader>4 ifor (int i = 0; i < ; i++){<enter><esc>k19la
 noremap <C-s> :%s/
 
@@ -45,6 +51,9 @@ inoremap <C-b> <esc>bi
 inoremap <C-j> <Left>
 inoremap <C-k> <Down>
 inoremap <C-l> <Right>
+inoremap <C-J> <Left>
+inoremap <C-K> <Down>
+inoremap <C-L> <Right>
 inoremap <C-]> <esc>]a
 inoremap begin<CR> begin<CR>end<UP><Right><Right><CR>
 inoremap {<CR> {<CR>}<up><CR>

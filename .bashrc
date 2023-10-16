@@ -85,21 +85,27 @@ function Commitnt() {
 }
 
 # Project bindings
+function Genp() {
+  case $* in
+    des* ) shift 1; command genp df $pol/packages.yaml:scp_customization "$@" ;;
+    tb* ) shift 1; command genp df $pol/packages.yaml:scp_top_tb "$@" ;;
+  esac
+}
 
 function SCP
 {
 export scp=/projects/ssg/pj32000042_blackbird/users/oliman01/e_scp_f4
-export pol=$scp/scp_canvas/client_polaris.canvas
+export pol=$scp/client_polaris.canvas
 export top=$pol/scp_top_tb/logical/scp_top_tb
 export can=$pol/scp_customization/logical/scp_customization/verilog
 export des=$scp/design_library/scp_customization.ip/logical/scp_customization/verilog
-export tb=$scp/verif_library/scp_tb.ip/logical/scp_top_tb/
+export tb=$scp/verif_library/scp_tb.ip/logical/scp_top_tb
 alias SCP='cd $scp'
 alias Top='cd $top'
 alias Can='cd $can'
 alias Des='cd $des'
+alias Pol='cd $pol'
 alias Tb='cd $tb'
-alias Genp='genp df $scp/scp_canvas/client_polaris.canvas/packages.yaml:scp_customization -p'
 alias Src='pushd $PWD > /dev/null; \
            echo "Sourcing sourceme.bash from $scp"; cd $scp; source sourceme; \
            popd > /dev/null;'
@@ -109,7 +115,15 @@ cd $scp
 function BB 
 {
 export bb=/projects/ssg/pj32000042_blackbird/users/oliman01/bb24_comss
+export can=$bb/bb24_comss.canvas
+export top=$can/bb24_comss_0_tb/logical/bb24_comss_0_tb
+export des=$bb/design_library/comss.ip/logical
+export tb=$bb/verif_library/comss_tb.ip/logical/comss_tb
 alias BB='cd $bb'
+alias Can='cd $can'
+alias Des='cd $des'
+alias Top='cd $top'
+alias Tb='cd $tb'
 alias Src='pushd $PWD > /dev/null; \
            echo "Sourcing sourceme.bash from $bb"; cd $bb; source sourceme.bash; \
            popd > /dev/null;'
@@ -132,39 +146,9 @@ alias Src='pushd $PWD > /dev/null; \
 cd $voy
 }
 
-function FVP 
-{
-export voy=/projects/ssg/pj33000227_voyager/users/oliman01/voyager_fvp
-export can=$voy/fremont.canvas
-export top=$can/css_tb/css_top_tb
-export tb=$voy/verif_library/css_top_tb/logical/css_top_tb
-alias Voy='cd $voy'
-alias Top='cd $top'
-alias Tb='cd $tb'
-alias Src='pushd $PWD > /dev/null; \
-           echo "Sourcing sourceme.bash from $voy"; cd $voy; source sourceme.bash; \
-           popd > /dev/null;'
-cd $voy
-}
-
-function Dev
+function Voy
 {
 export voy=/projects/ssg/pj33000227_voyager/users/oliman01/voyager_dev
-export can=$voy/fpga.canvas
-export top=$can/css_tb/css_top_tb
-export tb=$voy/verif_library/css_top_tb/logical/css_top_tb
-alias Voy='cd $voy'
-alias Top='cd $top'
-alias Tb='cd $tb'
-alias Src='pushd $PWD > /dev/null; \
-           echo "Sourcing sourceme.bash from $voy"; cd $voy; source sourceme.bash; \
-           popd > /dev/null;'
-cd $voy
-}
-
-function DM3
-{
-export voy=/projects/ssg/pj33000227_voyager/users/oliman01/voyager_dm3
 export can=$voy/fpga.canvas
 export top=$can/css_tb/css_top_tb
 export tb=$voy/verif_library/css_top_tb/logical/css_top_tb
