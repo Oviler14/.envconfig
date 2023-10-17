@@ -25,10 +25,9 @@ module load arm/cluster
 # Modules
 module load swdev git/git/2.37.0
 #module load arm/clusterfg/1.0
-module load util vim/vim/9.0.5
+module load util vim/vim/8.2
 module load swdev python/python/2.7.8
-module load swdev python/numpy_py2.7.8/1.16.1
-module load armandino/txtstyle/1.1.2
+module load util armandino/txtstyle/1.1.2
 
 # Terminal Options
 export PS1="\n\[\033[38;5;134m\]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')\[$(tput sgr0)\] \[\033[38;5;110m\]\t\[$(tput sgr0)\] \[\033[38;5;79m\]\w\[$(tput sgr0)\]\n\\$\[$(tput sgr0)\] "
