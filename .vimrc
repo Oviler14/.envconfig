@@ -21,8 +21,8 @@ map <C-i>  10i
 noremap ] }ge$
 noremap [ {w
 noremap <silent><C-]> /;<CR>:noh<CR>
-noremap <silent><C-b> ?\v^(module\s)*\s*\w+\s(u_\w+\s)*#*\(<CR>:noh<CR>
-noremap <silent><C-n> /\v^(module\s)*\s*\w+\s(u_\w+\s)*#*\(<CR>:noh<CR>zz
+noremap <silent><C-b> ?\v^(module\s)*\s*\w+\s*(u_\w+\s*)*#*\(<CR>:noh<CR>
+noremap <silent><C-n> /\v^(module\s)*\s*\w+\s*(u_\w+\s*)*#*\(<CR>:noh<CR>zz
 nnoremap zx za
 nnoremap zc zM
 nnoremap zv zr

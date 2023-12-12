@@ -70,6 +70,8 @@ alias Find='find . -iname'
 alias Lock='lsof +D'
 alias Colours='for COLOR in {1..255}; do echo -en "\e[38;5;${COLOR}m${COLOR} "; done; echo;'
 alias Track='git log --follow -p --'
+alias Socrates='module load eda arm/socrates/socrates_1.7.4; \
+                bsub_8G ARM-Socrates'
 
 CI() {
   git push origin HEAD:refs/for/"$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
@@ -85,15 +87,17 @@ function Commitnt() {
 
 # Project bindings
 function Genp() {
-  case $* in
-    des* ) shift 1; command genp df $can/packages.yaml:scp_customization "$@" ;;
-    tb* ) shift 1; command genp df $can/packages.yaml:scp_top_tb "$@" ;;
+  case $2 in
+    des ) command genp "$1" $can/packages.yaml:scp_customization "$3" ;;
+    tb ) command genp "$1" $can/packages.yaml:scp_top_tb "$3" ;;
   esac
 }
 
+export scp=/projects/ssg/pj32000042_blackbird/users/oliman01/e_scp_f4
+export bb=/projects/ssg/pj32000042_blackbird/users/oliman01/bb24_comss
+
 function SCP
 {
-export scp=/projects/ssg/pj32000042_blackbird/users/oliman01/e_scp_f4
 export can=$scp/scp.canvas
 export top=$can/scp_top_tb/logical/scp_top_tb
 export cdes=$can/scp_customization/logical/scp_customization/verilog
@@ -112,7 +116,6 @@ cd $scp
 
 function BB 
 {
-export bb=/projects/ssg/pj32000042_blackbird/users/oliman01/bb24_comss
 export can=$bb/bb24_comss.canvas
 export top=$can/bb24_comss_0_tb/logical/bb24_comss_0_tb
 export des=$bb/design_library/comss.ip/logical
