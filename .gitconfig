@@ -14,3 +14,25 @@
 [alias]
   lg = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
   st = status
+  pr = pull --rebase
+  ca = commit --amend
+  cane = commit --amend --no-edit
+  ps = !git stash && git pull && git stash pop
+
+[url "ssh://mirror.eu-west-1.gerrit-na01.aws.arm.com"]
+    insteadOf = ssh://na-gerrit-1.nahpc.arm.com
+    insteadOf = ssh://na-gerrit-1
+    insteadOf = ssh://hw-gerrit.nahpc.arm.com
+[url "ssh://mirror.eu-west-1.gerrit-eu01.aws.arm.com"]
+    insteadOf = ssh://eu-gerrit-1.euhpc.arm.com
+    insteadOf = ssh://eu-gerrit-1
+    insteadOf = ssh://ds-gerrit.euhpc.arm.com
+[url "ssh://mirror.eu-west-1.gerrit-eu02.aws.arm.com"]
+    insteadOf = ssh://eu-gerrit-2.euhpc.arm.com
+    insteadOf = ssh://eu-gerrit-2
+    insteadOf = ssh://hw-gerrit.euhpc.arm.com
+[url "ssh://eu-gerrit-2.euhpc.arm.com:29418/"]
+    pushInsteadOf = "ssh://eu-gerrit-2.euhpc.arm.com:29418/"
+    pushInsteadOf = "ssh://eu-gerrit-2:29418/"
+[credential]
+	helper = store

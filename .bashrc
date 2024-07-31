@@ -23,17 +23,24 @@ module load arm/cluster
 #######################################
 
 # Modules
-module load swdev git/git/2.37.0
-#module load arm/clusterfg/1.0
-module load util vim/vim/8.2
-module load swdev python/python/2.7.8
-module load util armandino/txtstyle/1.1.2
+module load util swdev
+module load git/git/2.37.0
+module load vim/vim/9.0.5
+module load neovim/neovim/0.9.0
+module load python/python/2.7.8
+module load armandino/txtstyle/1.1.2
+module load burntsushi/ripgrep/13.0.0
+module load rust/rust-fd/8.2.1
 
 # Terminal Options
 export PS1="\n\[\033[38;5;134m\]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')\[$(tput sgr0)\] \[\033[38;5;110m\]\t\[$(tput sgr0)\] \[\033[38;5;79m\]\w\[$(tput sgr0)\]\n\\$\[$(tput sgr0)\] "
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
+
+# FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Z
+[ -f ~/.z_cd/z.sh ] && source ~/.z_cd/z.sh
 
 function up() {
   case $1 in
@@ -49,7 +56,7 @@ function Du() {
   du -hd $1 | sort -hr
 }
 bind '"\t":menu-complete'
-bind '"`":menu-complete-backward'
+#bind '"`":menu-complete-backward'
 bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 bind "set menu-complete-display-prefix on"
@@ -72,6 +79,7 @@ alias Colours='for COLOR in {1..255}; do echo -en "\e[38;5;${COLOR}m${COLOR} "; 
 alias Track='git log --follow -p --'
 alias Socrates='module load eda arm/socrates/socrates_1.7.4; \
                 bsub_8G ARM-Socrates'
+alias vim='nvim'
 
 CI() {
   git push origin HEAD:refs/for/"$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')"
@@ -93,8 +101,16 @@ function Genp() {
   esac
 }
 
-export scp=/projects/ssg/pj32000042_blackbird/users/oliman01/e_scp_f4
-export bb=/projects/ssg/pj32000042_blackbird/users/oliman01/bb24_comss
+export pjcode=pj32000042
+function Bsub() {
+  memory="$1"
+  shift
+  bsub -P $pjcode -M "$memory"  -R 'select[centos7 && pricing==ondemand]' -W 24:00 -Is $@
+}
+
+export scp=/projects/se/pj32000042_blackbird_css/users/oliman01/e_scp_f4
+export bb=/projects/se/pj32000042_blackbird_css/users/oliman01/bb24_comss
+export tcs=/projects/se/pj32000042_blackbird_css/users/oliman01/tcs2025
 
 function SCP
 {
@@ -130,46 +146,25 @@ alias Src='pushd $PWD > /dev/null; \
 cd $bb
 }
 
-function LCP 
+function TCS 
 {
-export voy=/projects/ssg/pj33000227_voyager/users/oliman01/voyager_lcp
-export can=$voy/fremont.canvas
-export top=$voy/verif_library/lcp_tb/logical/lcp_top_tb
-export des=$voy/design_library/lcp.ip/logical/lcp_top/verilog
+export can=$tcs/tcs2025_comss.canvas
+export top=$can/tcs2025_comss_0_tb/logical/tcs2025_comss_0_tb
+export des=$tcs/design_library/comss.ip/logical
+export tb=$tcs/verif_library/comss_tb.ip/logical/comss_tb
 alias Can='cd $can'
-alias Top='cd $top'
 alias Des='cd $des'
-alias Src='pushd $PWD > /dev/null; \
-           echo "Sourcing sourceme.bash from $voy"; cd $voy; source sourceme.bash; \
-           popd > /dev/null;'
-cd $voy
-}
-
-function Voy
-{
-export voy=/projects/ssg/pj33000227_voyager/users/oliman01/voyager_dev
-export can=$voy/fpga.canvas
-export top=$can/css_tb/css_top_tb
-export tb=$voy/verif_library/css_top_tb/logical/css_top_tb
 alias Top='cd $top'
 alias Tb='cd $tb'
 alias Src='pushd $PWD > /dev/null; \
-           echo "Sourcing sourceme.bash from $voy"; cd $voy; source sourceme.bash; \
+           echo "Sourcing sourceme.bash from $tcs"; cd $tcs; source sourceme.bash; \
            popd > /dev/null;'
-cd $voy
+cd $tcs
 }
 
-export pjcode=pj32000042
-alias bsub_4G='bsub -P $pjcode -M 4G  -R 'select[rhe7]' -W 24:00 -Is'
-alias bsub_8G='bsub -P $pjcode -M 8G -R 'select[rhe7]' -W 24:00 -Is'
-alias bsub_16G='bsub -P $pjcode -M 16G -R 'select[rhe7]' -W 24:00 -Is'
-alias bsub_16G_rhe6='bsub -P $pjcode -M 16G -R 'select[rhe6]' -W 24:00 -Is'
-alias bsub_32G='bsub -P $pjcode -M 32G -R 'select[rhe7]' -W 48:00 -Is'
-alias VCS='bsub_8G vcs -sverilog'
-
-alias LCM='cd /projects/ssg/pj31000117_kydos/users/oliman01/lcm'
-alias MCN='cd /projects/ssg/pj1000598/users/oliman01'
-alias Gen='cd /projects/ssg/refsys_perseus/users/oliman01/genesis'
-alias Gtop='cd /projects/ssg/refsys_perseus/users/oliman01/genesis/small.canvas/css_tb/css_top_tb'
+function Vis() {
+  module load eda mentor/questasim/2023.4 mentor/questavdbg/2023.4
+  Bsub 4G visualizer -wavefile $1 -designfile $2
+}
 
 SCP
