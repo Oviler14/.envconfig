@@ -27,7 +27,7 @@ module load util swdev
 module load git/git/2.37.0
 module load vim/vim/9.0.5
 module load neovim/neovim/0.9.0
-module load python/python/2.7.8
+module load python/python/3.11.2 python/pip_py3.11.2/23.0.1
 module load armandino/txtstyle/1.1.2
 module load burntsushi/ripgrep/13.0.0
 module load rust/rust-fd/8.2.1
@@ -56,7 +56,7 @@ function Du() {
   du -hd $1 | sort -hr
 }
 bind '"\t":menu-complete'
-#bind '"`":menu-complete-backward'
+bind '"`":menu-complete-backward'
 bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 bind "set menu-complete-display-prefix on"
